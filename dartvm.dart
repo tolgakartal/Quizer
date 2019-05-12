@@ -4,13 +4,18 @@
   /*-----------------------------------------------------------------------------------
    Side note (ARM): 
   -----------------------------------------------------------------------------------*/
-  const String arm =
+  const String whatIsArmQuestion = 'What is ARM';
+  const String whatIsArmAnswer =
    """ARM is a family of reduced instruction set computing architecture for processors.
-   Main difference from other CPU architectures is that it requires fewer transistors
-   that those with a complex instruction set computing architecture which improves
-   cost, power consumption and heat dissipation. Between ARMv3 to ARMv7 architecture
+   Between ARMv3 to ARMv7 architecture
    supported only 32-bit address space, from ARMv8-A architecture ARM added support
    for a 64-bit address space.""";
+  const String armMainDifferenceQuestion = 
+  'What is the main difference of ARM from other CPU architectures';
+  const String armMainDifferenceAnswer =
+  """Main difference from other CPU architectures is that it requires fewer transistors
+   that those with a complex instruction set computing architecture which improves
+   cost, power consumption and heat dissipation.""";
 
   /*-----------------------------------------------------------------------------------
    Dart VM:
