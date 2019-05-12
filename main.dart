@@ -102,6 +102,7 @@ void dartVmTest() {
   print('\n[1] Dart Vm test has chosen');
 
   askAQuestion(whatIsArmQuestion, whatIsArmAnswer);
+  askAQuestion(whenArm64BitQuestion, whenArm64BitAnswer);
   askAQuestion(armMainDifferenceQuestion, armMainDifferenceAnswer);
 }
 

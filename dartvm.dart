@@ -8,7 +8,7 @@
   const String whatIsArmAnswer =
    'ARM is a family of @reduced @instruction @set computing @architecture for processors';
   const String whenArm64BitQuestion = 'What version ARM has added 64-bit address space support';
-  const String whenArm64BitAnswer = 'ARMv8';
+  const String whenArm64BitAnswer = '@v8';
   const String armMainDifferenceQuestion = 
   'What is the main difference of ARM from other CPU architectures';
   const String armMainDifferenceAnswer =
