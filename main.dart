@@ -26,41 +26,80 @@ final ignoreWordSet = [
   'are',
   'it'
 ].toSet();
+Set<String> currentUserAnswer;
+Set<String> currentCorrectAnswerWithoutTags;
 
-bool checkAnswer(String answer, String usersAnswer) {
-  var answerWords = answer.toUpperCase().split(" ").toSet();
-  answerWords.removeAll(ignoreWordSet);
-  var usersAnswerWords = usersAnswer.toUpperCase().split(" ").toSet();
-  var answerWordCount = answerWords.length;
+int calculateFirstFactorScore(String userAnswer, String correctAnswerRaw) {
+  var keywords = new Set<String>();
+  currentUserAnswer = userAnswer.toUpperCase().split(' ').toSet();
+  currentCorrectAnswerWithoutTags =
+      correctAnswerRaw.replaceAll('@', '').toUpperCase().split(' ').toSet();
+  var currentCorrectAnswer = correctAnswerRaw.toUpperCase().split(' ').toSet();
+  currentCorrectAnswer.removeAll(ignoreWordSet);
+  currentCorrectAnswer
+      .where((x) => x.startsWith('@'))
+      .forEach((x) => keywords.add(x.replaceAll('@', '')));
 
-  var sharedWords = answerWords.intersection(usersAnswerWords);
-  var sharedWordCount = sharedWords.length;
-  var grade = (sharedWordCount * 100) ~/ answerWordCount;
-
-  if (grade > 45) {
-    print("\n   Good answer ! You've got $grade%");
-    return true;
-  } else {
-    print("\n   Wrong answer :( Your grade is $grade%");
-    return false;
+  var firstFactorSharedSet = currentUserAnswer.intersection(keywords);
+  int firstFactorScore;
+  if (keywords.length > 0) {
+    firstFactorScore = (firstFactorSharedSet.length * 100) ~/ keywords.length;
   }
+
+  return firstFactorScore;
+}
+
+int calculateSecondScoreFactor() {
+  var secondFactorSharedSet =
+      currentCorrectAnswerWithoutTags.intersection(currentUserAnswer);
+
+  return (secondFactorSharedSet.length * 100) ~/
+      currentCorrectAnswerWithoutTags.length;
+}
+
+/// Calculates the grade by comparing user's answer with the answer from
+/// appropriate String value. Grade is calculated by two factors. First
+/// factor is worth 60% of the answer score, it calculates how many of
+/// the keywords are input by the user. A keyword is a word tagged with @ .
+/// The second factor is worth 40% of the score, it calculates the intersection
+/// word amount between the right answer and user's answer. If no tag is
+/// used in the documented answer, then only second factor is taken into account
+bool checkAnswer(String correctAnswer, String usersAnswer) {
+  var firstFactorScore = calculateFirstFactorScore(usersAnswer, correctAnswer);
+  var secondFactorScore = calculateSecondScoreFactor();
+
+  int score;
+  if (firstFactorScore != null) {
+    score = (firstFactorScore * 0.6 + secondFactorScore * 0.4).toInt();
+  } else {
+    score = secondFactorScore;
+  }
+
+  if (score > 45) {
+    print("\n   Good answer ! You've got $score%");
+    return true;
+  }
+
+  print("\n   Wrong answer :( Your grade is $score%");
+  return false;
 }
 
 void askAQuestion(String question, String answer) {
   String usersAnswer;
+  var correctAnswerWithoutTags = answer.replaceAll('@', '');
   print('\n------------------------------------------------------------');
   print('[Question] $question');
   stdout.write('   Your answer: ');
   usersAnswer = stdin.readLineSync();
+  checkAnswer(answer, usersAnswer);
   if (canShowAnswers) {
-    print('\n[Answer] $answer');
+    print('\n[Answer] $correctAnswerWithoutTags');
   }
-  checkAnswer(whatIsArmAnswer, usersAnswer);
   print('------------------------------------------------------------');
 }
 
 void dartVmTest() {
-  print('\n*** Welcome to DART VM test ! ***');
+  print('\n[1] Dart Vm test has chosen');
 
   askAQuestion(whatIsArmQuestion, whatIsArmAnswer);
   askAQuestion(armMainDifferenceQuestion, armMainDifferenceAnswer);
