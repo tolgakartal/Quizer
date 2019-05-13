@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'package:args/args.dart';
 import 'dartvm.dart';
+import 'fileAccess.dart';
 
 ArgResults argResults;
 const showAnswers = 'show-answers';
+const path = 'path';
 bool canShowAnswers;
 final ignoreWordSet = [
   'a',
@@ -98,28 +100,26 @@ void askAQuestion(String question, String answer) {
   print('------------------------------------------------------------');
 }
 
-void dartVmTest() {
-  print('\n[1] Dart Vm test has chosen');
-
-  askAQuestion(whatIsArmQuestion, whatIsArmAnswer);
-  askAQuestion(whenArm64BitQuestion, whenArm64BitAnswer);
-  askAQuestion(armMainDifferenceQuestion, armMainDifferenceAnswer);
-}
-
-void main(List<String> arguments) {
+Future main(List<String> arguments) async {
   final parser = new ArgParser()
     ..addFlag(showAnswers, negatable: false, abbr: 's');
 
   argResults = parser.parse(arguments);
-  argResults[showAnswers];
-  canShowAnswers = argResults.arguments.contains(showAnswers);
+  List<String> path = argResults.rest;
+  var quiz = await dcat(path, false);
 
-  print('\n[1] Start dart VM test');
-  print('[2] Start dart AOT test');
+  canShowAnswers = argResults.arguments.contains(showAnswers);
+  var questionLength = quiz.entries.length;
+
+  print(
+      '\nThe file you have imported contains $questionLength questions. \nDo you want to start now ? Y/N');
+
   stdin.echoMode = false;
   var input = stdin.readLineSync();
   stdin.echoMode = true;
-  if (input.toUpperCase() == '1') {
-    dartVmTest();
+  if (input.toUpperCase() == 'Y') {
+    for (var entry in quiz.entries) {
+      askAQuestion(entry.key, entry.value);
+    }
   }
 }

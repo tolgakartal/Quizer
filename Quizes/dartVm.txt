@@ -1,0 +1,13 @@
+[Question]
+What is ARM
+[Answer]
+ARM is a family of @reduced @instruction @set computing @architecture for processors
+[Question]
+What version ARM has added 64-bit address space support
+[Answer]
+v8
+[Question]
+What is the main difference of ARM from other CPU architectures
+[Answer]
+Main difference from other CPU architectures is that it requires @fewer @transistors that those with a complex instruction set computing architecture which @improves @cost , @power @consumption and @heat @dissipation
+[End]
