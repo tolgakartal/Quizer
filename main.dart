@@ -1,41 +1,23 @@
 import 'dart:io';
 import 'package:args/args.dart';
-import 'dartvm.dart';
 import 'fileAccess.dart';
+import 'constants.dart';
 
 ArgResults argResults;
-const showAnswers = 'show-answers';
-const path = 'path';
-bool canShowAnswers;
-final ignoreWordSet = [
-  'a',
-  'an',
-  'the',
-  'with',
-  ',',
-  '.',
-  '',
-  ' ',
-  'from',
-  'of',
-  'and',
-  'or',
-  'that',
-  'where',
-  'which',
-  'who',
-  'is',
-  'are',
-  'it'
-].toSet();
 Set<String> currentUserAnswer;
-Set<String> currentCorrectAnswerWithoutTags;
+Set<String> correctAnswerWithoutTags;
+bool canShowAnswers;
 
 int calculateFirstFactorScore(String userAnswer, String correctAnswerRaw) {
   var keywords = new Set<String>();
-  currentUserAnswer = userAnswer.toUpperCase().split(' ').toSet();
-  currentCorrectAnswerWithoutTags =
-      correctAnswerRaw.replaceAll('@', '').toUpperCase().split(' ').toSet();
+  currentUserAnswer = userAnswer
+      .replaceAll(',', '')
+      .replaceAll('.', '')
+      .toUpperCase().split(' ').toSet();
+  correctAnswerWithoutTags =
+      correctAnswerRaw
+      .replaceAll('@', '')      
+      .toUpperCase().split(' ').toSet();
   var currentCorrectAnswer = correctAnswerRaw.toUpperCase().split(' ').toSet();
   currentCorrectAnswer.removeAll(ignoreWordSet);
   currentCorrectAnswer
@@ -53,10 +35,10 @@ int calculateFirstFactorScore(String userAnswer, String correctAnswerRaw) {
 
 int calculateSecondScoreFactor() {
   var secondFactorSharedSet =
-      currentCorrectAnswerWithoutTags.intersection(currentUserAnswer);
+      correctAnswerWithoutTags.intersection(currentUserAnswer);
 
   return (secondFactorSharedSet.length * 100) ~/
-      currentCorrectAnswerWithoutTags.length;
+      correctAnswerWithoutTags.length;
 }
 
 /// Calculates the grade by comparing user's answer with the answer from
