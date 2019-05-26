@@ -1,39 +1,23 @@
 import 'dart:io';
 import 'package:args/args.dart';
-import 'dartvm.dart';
+import 'fileAccess.dart';
+import 'constants.dart';
 
 ArgResults argResults;
-const showAnswers = 'show-answers';
-bool canShowAnswers;
-final ignoreWordSet = [
-  'a',
-  'an',
-  'the',
-  'with',
-  ',',
-  '.',
-  '',
-  ' ',
-  'from',
-  'of',
-  'and',
-  'or',
-  'that',
-  'where',
-  'which',
-  'who',
-  'is',
-  'are',
-  'it'
-].toSet();
 Set<String> currentUserAnswer;
-Set<String> currentCorrectAnswerWithoutTags;
+Set<String> correctAnswerWithoutTags;
+bool canShowAnswers;
 
 int calculateFirstFactorScore(String userAnswer, String correctAnswerRaw) {
   var keywords = new Set<String>();
-  currentUserAnswer = userAnswer.toUpperCase().split(' ').toSet();
-  currentCorrectAnswerWithoutTags =
-      correctAnswerRaw.replaceAll('@', '').toUpperCase().split(' ').toSet();
+  currentUserAnswer = userAnswer
+      .replaceAll(',', '')
+      .replaceAll('.', '')
+      .toUpperCase().split(' ').toSet();
+  correctAnswerWithoutTags =
+      correctAnswerRaw
+      .replaceAll('@', '')      
+      .toUpperCase().split(' ').toSet();
   var currentCorrectAnswer = correctAnswerRaw.toUpperCase().split(' ').toSet();
   currentCorrectAnswer.removeAll(ignoreWordSet);
   currentCorrectAnswer
@@ -51,10 +35,10 @@ int calculateFirstFactorScore(String userAnswer, String correctAnswerRaw) {
 
 int calculateSecondScoreFactor() {
   var secondFactorSharedSet =
-      currentCorrectAnswerWithoutTags.intersection(currentUserAnswer);
+      correctAnswerWithoutTags.intersection(currentUserAnswer);
 
   return (secondFactorSharedSet.length * 100) ~/
-      currentCorrectAnswerWithoutTags.length;
+      correctAnswerWithoutTags.length;
 }
 
 /// Calculates the grade by comparing user's answer with the answer from
@@ -98,27 +82,26 @@ void askAQuestion(String question, String answer) {
   print('------------------------------------------------------------');
 }
 
-void dartVmTest() {
-  print('\n[1] Dart Vm test has chosen');
-
-  askAQuestion(whatIsArmQuestion, whatIsArmAnswer);
-  askAQuestion(armMainDifferenceQuestion, armMainDifferenceAnswer);
-}
-
-void main(List<String> arguments) {
+Future main(List<String> arguments) async {
   final parser = new ArgParser()
     ..addFlag(showAnswers, negatable: false, abbr: 's');
 
   argResults = parser.parse(arguments);
-  argResults[showAnswers];
-  canShowAnswers = argResults.arguments.contains(showAnswers);
+  List<String> path = argResults.rest;
+  var quiz = await dcat(path, false);
 
-  print('\n[1] Start dart VM test');
-  print('[2] Start dart AOT test');
+  canShowAnswers = argResults.arguments.contains(showAnswers);
+  var questionLength = quiz.entries.length;
+
+  print(
+      '\nThe file you have imported contains $questionLength questions. \nDo you want to start now ? Y/N');
+
   stdin.echoMode = false;
   var input = stdin.readLineSync();
   stdin.echoMode = true;
-  if (input.toUpperCase() == '1') {
-    dartVmTest();
+  if (input.toUpperCase() == 'Y') {
+    for (var entry in quiz.entries) {
+      askAQuestion(entry.key, entry.value);
+    }
   }
 }

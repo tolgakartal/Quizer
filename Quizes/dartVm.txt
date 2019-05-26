@@ -1,0 +1,29 @@
+[Question]
+What is ARM
+[Answer]
+ARM is a family of @reduced @instruction @set computing @architecture for processors
+[Question]
+What version ARM has added 64-bit address space support
+[Answer]
+v8
+[Question]
+What is the main difference of ARM from other CPU architectures
+[Answer]
+Main difference from other CPU architectures is that it requires @fewer @transistors that those with a complex instruction set computing architecture which @improves @cost , @power @consumption and @heat @dissipation
+[Question]
+Which compilation pipelines does Dart VM can use
+[Answer]
+Just-in-Time @JIT and Ahead-of-Time @AOT
+[Question]
+How Dart VM can execute the code
+[Answer]
+Dart can execute the code from the @source, @Kernal @binary using JIT, @AOT @snapshot or @AppJIT snapshot.
+[Question]
+What is the difference between executing code from source, Kernal binary, AOT snapshot or AppJIT ?
+[Answer]
+How and when Dart can @convert the @source @code into @executable code
+[Question]
+Does dart code running from the Dart VM directly
+[Answer]
+Dart code runs within @isolation from the Dart VM
+[End]
