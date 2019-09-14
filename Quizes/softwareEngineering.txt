@@ -1,0 +1,29 @@
+[Question]
+How mutable and immutable type vary ?
+[Answer]
+Mutable types are those whose data members can be *changed after the instance is *created but immutable types are those whose data members can not be changed after the instance is created
+[Question]
+How does the memory behave when a new value is assigned to an immutable type ?
+[Answer]
+A *new *memory is *created and the modified value is *stored in new memory
+[Question]
+How does the memory behave when a new value is assigned to a mutable type ?
+[Answer]
+Value is changed in the *same *address in the *memory
+[Question]
+What happens when we assign new values to an immutable type in a large loop ?
+[Answer]
+Because each time we assign a new value to an immutable, we allocate *new *references in the memory, there will be a lot of *unreferenced objects waiting for *garbage *collector to clean.
+[Question]
+Which type is easier from the thread safety perspective, mutable or immutable ?
+[Answer]
+*Immutable because the instantiated variable is on the same thread, future assignments are seperate references in the memory and on their own thread used at that time.
+[Question]
+What is subtyping / inclusion polymorphism ?
+[Answer]
+*Subtype is a *datatype that is related to another datatype *supertype by some notion of *substitutability
+[Question]
+How do you write S is a subtype of T using relation symbol ?
+[Answer]
+S <: T
+[End]

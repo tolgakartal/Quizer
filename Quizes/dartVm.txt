@@ -23,7 +23,7 @@ What is the difference between executing code from source, Kernal binary, AOT sn
 [Answer]
 How and when Dart can @convert the @source @code into @executable code
 [Question]
-Does dart code running from the Dart VM directly
+Does dart code running from the kernel directly
 [Answer]
 Dart code runs within @isolation from the Dart VM
 [End]
