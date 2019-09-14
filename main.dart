@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'fileAccess.dart';
 import 'constants.dart';
+import 'scoreCalculator.dart';
 
 ArgResults argResults;
 Set<String> currentUserAnswer;
@@ -9,15 +10,21 @@ Set<String> correctAnswerWithoutTags;
 bool canShowAnswers;
 
 int calculateFirstFactorScore(String userAnswer, String correctAnswerRaw) {
+  var scoreCalculator = new ScoreCalculator();
+
+  scoreCalculator.setKeywordsInCorrectAnswer(correctAnswerRaw);
+  scoreCalculator.formatCorrectAnswer(correctAnswerRaw);
+  scoreCalculator.formatUserAnswer(userAnswer);
+
   var keywords = new Set<String>();
   currentUserAnswer = userAnswer
       .replaceAll(',', '')
       .replaceAll('.', '')
-      .toUpperCase().split(' ').toSet();
+      .toUpperCase()
+      .split(' ')
+      .toSet();
   correctAnswerWithoutTags =
-      correctAnswerRaw
-      .replaceAll('@', '')      
-      .toUpperCase().split(' ').toSet();
+      correctAnswerRaw.replaceAll('@', '').toUpperCase().split(' ').toSet();
   var currentCorrectAnswer = correctAnswerRaw.toUpperCase().split(' ').toSet();
   currentCorrectAnswer.removeAll(ignoreWordSet);
   currentCorrectAnswer
