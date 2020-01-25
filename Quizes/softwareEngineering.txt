@@ -26,4 +26,10 @@ What is subtyping / inclusion polymorphism ?
 How do you write S is a subtype of T using relation symbol ?
 [Answer]
 S <: T
+[Question]
+What does variance mean ?
+[Answer]
+Variance refers to how subtyping between more complex types relates to subtyping between their components
+[Question]
+
 [End]

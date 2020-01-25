@@ -1,5 +1,71 @@
 [Question]
-What does covariant do ?
+How to declare a nullable type in dart
 [Answer]
-
+All types are nullable by default, no need for ? sign to signal nullable
+[Question]
+Are ??, ?. operators used in dart
+[Answer]
+The same way as in C#
+[Question]
+How to declare a private class or function in dart ?
+[Answer]
+Use an underscore as a prefix
+[Question]
+How to declare a delegate in dart ?
+[Answer]
+Use typedef to declare a delegate then you can hold an instance of it in a variable.
+e.g.
+typedef void aFunction(int value);
+void main(){ 
+    aFunction instance = functionImplementation;
+ }
+ void functionImplementation(int value) => value * 2;
+ [Question]
+ Does "new" keyword obligatory ?
+ [Answer]
+ Dart can figure out when you are defining a new element, hence you don’t need to say new if you don’t want to.
+ [Question]
+ What are the equavalents of Lists and Dictionary in dart ?
+ [Answer]
+ Lists are lists. Dictionary is Map
+ [Question]
+ Can you declare an interface in dart ?
+ [Answer]
+ Dart has a concept of implicit interface. Every class implicitly defines an interface containing all the instance members of the class.
+ [Question]
+ How your code should look like if you want to implement an interface of B in A class;
+ [Answer]
+ class A implements B
+ [Question]
+ What you should do for a class to unable its instantiation, so that it represents an interface ?
+ [Answer]
+ Use keyword abstract
+ [Question]
+ If you want to inherit B class for A class, how your code should look like ?
+ [Answer]
+ class A extends B
+ [Question]
+ Are every function overridable in dart ?
+ [Answer]
+ Yes
+ [Question]
+ How do you override a function in dart ?
+ [Answer]
+ use @override tag above the function declaration
+ [Question]
+ How to use null assignment operator ? Use String variable and 'Hi' as the value
+ [Answer]
+ String value ??= 'Hi"; if value is null then 'Hi' is assigned
+ [Question]
+ What is the equivalent of Task from C# in Dart ?
+ [Answer]
+ Future
+ [Question]
+ What is cascading expressions in dart ? And what is the equivalent of it in C# ?
+ [Answer]
+ In C# you use extension methods to enable to keep working on the same object. In Dart this comes out of the box.
+[Question]
+What is the difference between final and const
+[Answer]
+A final variable can only be set once
 [End]

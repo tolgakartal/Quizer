@@ -1,0 +1,25 @@
+[Question]
+What are the three tenets of redux ?
+[Answer]
+@Single @source of @truth, state can not @mutate, each change to state is made by @pure @functions and each change returns a @new @state
+[Question]
+Can you describe what would be the job of a person dropping off a form in redux world ?
+[Answer]
+@Action @creator
+[Question]
+What would be the job of a form in redux world ?
+[Answer]
+@Action
+[Question]
+What would be the job of the form receiver in redux world ?
+[Answer]
+@Dispatch
+[Question]
+What would be the job of a department who process the form in redux world ?
+[Answer]
+@Reducer
+[Question]
+What would be the job of a compiled department data in redux world ?
+[Answer]
+@State
+[End]
