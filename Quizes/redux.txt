@@ -1,7 +1,7 @@
 [Question]
 What are the three tenets of redux ?
 [Answer]
-@Single @source of @truth, state can not @mutate, each change to state is made by @pure @functions and each change returns a @new @state
+@Single @source of @truth, state can not @mutate, state changes done by pure @functions and each change returns a new @state
 [Question]
 Can you describe what would be the job of a person dropping off a form in redux world ?
 [Answer]
