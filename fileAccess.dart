@@ -2,11 +2,11 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:args/args.dart';
 
+import 'main.dart';
+
 const lineNumber = 'line-number';
 String currentQuestion;
 String currentAnswer;
-
-ArgResults argResults;
 
 void main(List<String> arguments) {
   exitCode = 0; //presume success

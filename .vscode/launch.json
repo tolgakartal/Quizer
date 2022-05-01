@@ -1,0 +1,11 @@
+{
+    "configurations": [
+    {
+        "name": "Dart Quiz",
+        "type": "dart",
+        "request": "launch",
+        "program": "main.dart",
+        "args": ["-s", "Quizes/dartVm.txt"]
+    }
+    ]
+}

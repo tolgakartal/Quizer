@@ -91,13 +91,18 @@ void askAQuestion(String question, String answer) {
 
 Future main(List<String> arguments) async {
   final parser = new ArgParser()
-    ..addFlag(showAnswers, negatable: false, abbr: 's');
+    ..addFlag(
+      showAnswers,
+      negatable: false,
+      abbr: 's',
+    );
 
   argResults = parser.parse(arguments);
   List<String> path = argResults.rest;
   var quiz = await dcat(path, false);
 
-  canShowAnswers = argResults.arguments.contains(showAnswers);
+  canShowAnswers = argResults.arguments.contains('-s') ||
+      argResults.arguments.contains('--show-answers');
   var questionLength = quiz.entries.length;
 
   print(
