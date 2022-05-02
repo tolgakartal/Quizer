@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
 
+part 'quiz_element_dao.g.dart';
+
 @HiveType(typeId: 0)
 class QuizElementDao extends HiveObject {
   QuizElementDao({

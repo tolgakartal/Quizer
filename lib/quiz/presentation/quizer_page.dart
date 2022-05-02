@@ -15,6 +15,7 @@ class QuizerPage extends StatelessWidget {
       appBar: Platform.isIOS || Platform.isAndroid
           ? AppBar(title: const Text('QuizerApp'))
           : null,
+      backgroundColor: Colors.grey[200],
       body: BlocProvider(
         create: (_) => QuizCubit(
           repository: context.read<QuizRepository>(),

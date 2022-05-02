@@ -1,17 +1,17 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:quizer_app/quiz/model/domain/quiz_element.dart';
+import 'package:quizer_app/quiz/model/dao/quiz_element_dao.dart';
 import 'package:quizer_app/quiz/presentation/quizer_page.dart';
 import 'package:quizer_app/quiz/repository/quiz_repository.dart';
 
 void main() async {
   /// Prepare quiz datastore for consumption
   await Hive.initFlutter();
-  //Hive.registerAdapter(QuizElementAdapter());
-  await Hive.openBox<QuizElement>(QuizRepository.cacheBoxName);
+  Hive.registerAdapter(QuizElementDaoAdapter());
+  await Hive.openBox<QuizElementDao>(QuizRepository.cacheBoxName);
+
+  WidgetsFlutterBinding.ensureInitialized();
 
   /// Once datastore ready then run the app
   runApp(const QuizerApp());

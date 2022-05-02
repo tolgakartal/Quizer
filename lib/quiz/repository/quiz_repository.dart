@@ -4,6 +4,7 @@ import 'package:quizer_app/quiz/model/domain/quiz_element.dart';
 
 class QuizRepository {
   static const cacheBoxName = 'quizer_box';
+
   void addQuizElement({
     required String question,
     required String answer,
@@ -32,9 +33,9 @@ class QuizRepository {
 
   Future<Box<dynamic>> prepareDatastore() async {
     if (!Hive.isBoxOpen(cacheBoxName)) {
-      return await Hive.openBox<QuizElement>(cacheBoxName);
+      return await Hive.openBox<QuizElementDao>(cacheBoxName);
     }
 
-    return Hive.box<QuizElement>(cacheBoxName);
+    return Hive.box<QuizElementDao>(cacheBoxName);
   }
 }

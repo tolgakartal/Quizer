@@ -26,7 +26,10 @@ class QuizCubit extends Cubit<QuizState> {
     required String answer,
   }) {
     try {
-      state.quizElements.add(QuizElement(question: question, answer: answer));
+      repository.addQuizElement(
+        question: question,
+        answer: answer,
+      );
       emit(QuizState.success(quizElements: state.quizElements));
     } catch (e) {
       emit(const QuizState.failure());

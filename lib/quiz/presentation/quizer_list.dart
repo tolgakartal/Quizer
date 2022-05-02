@@ -20,6 +20,9 @@ class QuizerList extends StatelessWidget {
       case ListStatus.success:
         return Column(
           children: [
+            /// Vertical spacer
+            const SizedBox(height: 6.0),
+
             /// New quiz element
             const QuizerListItem(
               question: '',
@@ -29,12 +32,15 @@ class QuizerList extends StatelessWidget {
 
             /// Quiz list
             Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) => QuizerListItem(
-                  question: state.quizElements[index].question,
-                  answer: state.quizElements[index].answer,
+              child: Scrollbar(
+                child: ListView.builder(
+                  itemBuilder: (context, index) => QuizerListItem(
+                    question: state.quizElements[index].question,
+                    answer: '',
+                    correctAnswer: state.quizElements[index].answer,
+                  ),
+                  itemCount: state.quizElements.length,
                 ),
-                itemCount: state.quizElements.length,
               ),
             ),
 
