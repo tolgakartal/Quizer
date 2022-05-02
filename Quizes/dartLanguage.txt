@@ -1,5 +1,0 @@
-[Question]
-What does covariant do ?
-[Answer]
-
-[End]

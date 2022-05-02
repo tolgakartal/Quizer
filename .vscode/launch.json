@@ -1,11 +1,28 @@
 {
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
     "configurations": [
-    {
-        "name": "Dart Quiz",
-        "type": "dart",
-        "request": "launch",
-        "program": "main.dart",
-        "args": ["-s", "quizes/dartVm.txt"]
-    }
+        {
+            "name": "quizeapp",
+            "cwd": "quizeapp",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "quizeapp (profile mode)",
+            "cwd": "quizeapp",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "quizeapp (release mode)",
+            "cwd": "quizeapp",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
     ]
 }
