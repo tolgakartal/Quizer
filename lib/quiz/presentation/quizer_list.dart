@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quizer/quiz/cubit/quiz_cubit.dart';
-import 'package:quizer/quiz/presentation/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quizer_app/quiz/cubit/quiz_cubit.dart';
+import 'package:quizer_app/quiz/presentation/quizer_list_item.dart';
 
 class QuizerList extends StatelessWidget {
   const QuizerList({Key? key}) : super(key: key);
@@ -18,62 +18,31 @@ class QuizerList extends StatelessWidget {
 
       /// Success State
       case ListStatus.success:
-        return ListView.builder(
-          itemBuilder: (context, index) => Container(
-            padding: QuizerTheme.defaultInset,
-            child: Column(
-              children: [
-                /// Question title
-                const Text('Question'),
-
-                /// Question row
-                Row(
-                  children: [
-                    /// Question icon
-                    const Icon(Icons.question_mark),
-
-                    /// Horizontal spacer
-                    const SizedBox(width: 12),
-
-                    /// Question text
-                    Text(state.quizElements[index].question),
-                  ],
-                ),
-
-                /// Vertical spacer
-                QuizerTheme.defaultVerticalSpacer,
-
-                /// Answer box for user to input
-                TextField(
-                  decoration: QuizerTheme.defaultTextFieldDecoration
-                      .copyWith(labelText: 'Your answer'),
-                ),
-
-                /// Vertical spacer
-                QuizerTheme.defaultVerticalSpacer,
-
-                /// Icon to show or hide the answer
-                IconButton(
-                  icon: const Icon(
-                    Icons.visibility_off,
-                  ),
-                  onPressed: () {},
-                ),
-
-                /// Vertical spacer
-                QuizerTheme.defaultVerticalSpacer,
-
-                /// Correct answer title
-                const Text('Correct answer'),
-
-                /// Vertical spacer
-                QuizerTheme.defaultVerticalSpacer,
-
-                /// Answer text
-                Text(state.quizElements[index].answer),
-              ],
+        return Column(
+          children: [
+            /// New quiz element
+            const QuizerListItem(
+              question: '',
+              answer: '',
+              newElement: true,
             ),
-          ),
+
+            /// Quiz list
+            Expanded(
+              child: ListView.builder(
+                itemBuilder: (context, index) => QuizerListItem(
+                  question: state.quizElements[index].question,
+                  answer: state.quizElements[index].answer,
+                ),
+                itemCount: state.quizElements.length,
+              ),
+            ),
+
+            /// Vertical spacer
+            const SizedBox(
+              height: 12,
+            ),
+          ],
         );
 
       /// Failure State

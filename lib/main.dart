@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:quizer/quiz/model/domain/quiz_element.dart';
-import 'package:quizer/quiz/presentation/quizer_list.dart';
-import 'package:quizer/quiz/repository/quiz_repository.dart';
+import 'package:quizer_app/quiz/model/domain/quiz_element.dart';
+import 'package:quizer_app/quiz/presentation/quizer_page.dart';
+import 'package:quizer_app/quiz/repository/quiz_repository.dart';
 
 void main() async {
   /// Prepare quiz datastore for consumption
@@ -21,7 +24,7 @@ class QuizerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Quizer',
+      title: 'QuizerApp',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -34,7 +37,10 @@ class QuizerApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.amber,
       ),
-      home: const QuizerList(),
+      home: RepositoryProvider(
+        create: (context) => QuizRepository(),
+        child: const QuizerPage(),
+      ),
     );
   }
 }

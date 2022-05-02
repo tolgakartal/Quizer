@@ -5,24 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "quizeapp",
-            "cwd": "quizeapp",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "quizeapp (profile mode)",
-            "cwd": "quizeapp",
-            "request": "launch",
+            "name": "Flutter",
             "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "quizeapp (release mode)",
-            "cwd": "quizeapp",
             "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
+            "program": "lib/main.dart"
         }
+        
     ]
 }

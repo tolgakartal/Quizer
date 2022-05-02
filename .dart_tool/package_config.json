@@ -524,13 +524,13 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "quizer",
+      "name": "quizer_app",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-05-02T11:29:16.989023Z",
+  "generated": "2022-05-02T13:43:15.099573Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }
