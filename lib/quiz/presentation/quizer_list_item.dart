@@ -109,6 +109,16 @@ class _QuizerListItemState extends State<QuizerListItem> {
                         icon: const Icon(Icons.add),
                         onPressed: () {
                           /// Add new quiz element to datastore
+                          if (questionController.text.isEmpty ||
+                              questionController.text ==
+                                  'Question is required!') {
+                            questionController.text = 'Question is required!';
+                            Future.delayed(const Duration(seconds: 1), () {
+                              questionController.clear();
+                            });
+                            return;
+                          }
+
                           context.read<QuizCubit>().addQuizElement(
                                 question: questionController.text,
                                 answer: answerController.text,
