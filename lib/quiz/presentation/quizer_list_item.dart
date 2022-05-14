@@ -182,7 +182,7 @@ class _QuizerListItemState extends State<QuizerListItem> {
                     onPressed: () {
                       /// Delete quiz element in the datastore
                       context.read<QuizCubit>().deleteQuizElement(
-                            index: widget.index,
+                            question: widget.question,
                           );
 
                       /// Fetch and refresh all quiz elements from datastore

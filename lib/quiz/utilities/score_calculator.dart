@@ -111,7 +111,7 @@ class ScoreCalculator {
   ) {
     var secondFactorSharedSet =
         correctAnswerWithoutSpacesCommasTags.intersection(currentUserAnswer);
-
+    if (correctAnswerWithoutSpacesCommasTags.isEmpty) return 0;
     return (secondFactorSharedSet.length * 100) ~/
         correctAnswerWithoutSpacesCommasTags.length;
   }

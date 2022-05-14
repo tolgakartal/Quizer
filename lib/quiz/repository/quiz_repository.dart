@@ -17,10 +17,14 @@ class QuizRepository {
   }
 
   void deleteQuizElement({
-    required int index,
+    required String question,
   }) async {
     final box = await prepareDatastore();
-    box.delete(index);
+    final deletingElement = box.values.firstWhere(
+        (element) => element is QuizElementDao && element.question == question);
+    if (deletingElement.key != null) {
+      box.delete(deletingElement.key);
+    }
   }
 
   Future<List<QuizElement>> fetchQuizElements() async {

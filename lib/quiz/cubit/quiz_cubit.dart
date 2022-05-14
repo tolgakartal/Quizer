@@ -38,11 +38,11 @@ class QuizCubit extends Cubit<QuizState> {
 
   /// Delete existing question, answer pair `QuizElement` from the datastore
   void deleteQuizElement({
-    required int index,
+    required String question,
   }) {
     try {
       repository.deleteQuizElement(
-        index: index,
+        question: question,
       );
       emit(QuizState.success(quizElements: state.quizElements));
     } catch (e) {
