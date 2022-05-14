@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quizer_app/quiz/cubit/quiz_cubit.dart';
 import 'package:quizer_app/quiz/presentation/theme.dart';
 import 'package:quizer_app/quiz/utilities/score_calculator.dart';
+import 'package:quizer_app/quiz/utilities/text_field_validator.dart';
 
 /// A list item which contains three vertical elements below each other
 ///
@@ -36,6 +37,8 @@ class _QuizerListItemState extends State<QuizerListItem> {
   TextEditingController answerController = TextEditingController();
   TextEditingController questionController = TextEditingController();
   TextEditingController correctAnswerController = TextEditingController();
+  late TextFieldRequiredValidator questionRequiredValidator;
+  late TextFieldRequiredValidator answerRequiredValidator;
   bool showCorrectAnswer = false;
   int rating = 0;
 
@@ -44,6 +47,15 @@ class _QuizerListItemState extends State<QuizerListItem> {
     if (!widget.newElement) {
       questionController.text = widget.question;
       correctAnswerController.text = widget.correctAnswer ?? '';
+    } else {
+      questionRequiredValidator = TextFieldRequiredValidator(
+        validationMessage: 'Question is required!',
+        controller: questionController,
+      );
+      answerRequiredValidator = TextFieldRequiredValidator(
+        validationMessage: 'Answer is required!',
+        controller: answerController,
+      );
     }
     super.initState();
   }
@@ -108,17 +120,14 @@ class _QuizerListItemState extends State<QuizerListItem> {
                     ? IconButton(
                         icon: const Icon(Icons.add),
                         onPressed: () {
-                          /// Add new quiz element to datastore
-                          if (questionController.text.isEmpty ||
-                              questionController.text ==
-                                  'Question is required!') {
-                            questionController.text = 'Question is required!';
-                            Future.delayed(const Duration(seconds: 1), () {
-                              questionController.clear();
-                            });
+                          /// Validate first
+
+                          if (!questionRequiredValidator.validate() ||
+                              !answerRequiredValidator.validate()) {
                             return;
                           }
 
+                          /// Add new quiz element to datastore
                           context.read<QuizCubit>().addQuizElement(
                                 question: questionController.text,
                                 answer: answerController.text,
