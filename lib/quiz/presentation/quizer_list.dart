@@ -28,6 +28,7 @@ class QuizerList extends StatelessWidget {
               question: '',
               answer: '',
               newElement: true,
+              index: 0,
             ),
 
             /// Quiz list
@@ -38,6 +39,7 @@ class QuizerList extends StatelessWidget {
                     question: state.quizElements[index].question,
                     answer: '',
                     correctAnswer: state.quizElements[index].answer,
+                    index: index,
                   ),
                   itemCount: state.quizElements.length,
                 ),

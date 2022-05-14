@@ -16,6 +16,13 @@ class QuizRepository {
     ));
   }
 
+  void deleteQuizElement({
+    required int index,
+  }) async {
+    final box = await prepareDatastore();
+    box.delete(index);
+  }
+
   Future<List<QuizElement>> fetchQuizElements() async {
     final box = await prepareDatastore();
     final List<QuizElementDao> quizElementsDao =

@@ -35,4 +35,18 @@ class QuizCubit extends Cubit<QuizState> {
       emit(const QuizState.failure());
     }
   }
+
+  /// Delete existing question, answer pair `QuizElement` from the datastore
+  void deleteQuizElement({
+    required int index,
+  }) {
+    try {
+      repository.deleteQuizElement(
+        index: index,
+      );
+      emit(QuizState.success(quizElements: state.quizElements));
+    } catch (e) {
+      emit(const QuizState.failure());
+    }
+  }
 }

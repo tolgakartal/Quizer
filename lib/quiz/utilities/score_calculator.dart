@@ -41,8 +41,15 @@ class ScoreCalculator {
         .toUpperCase()
         .split(' ')
         .toSet();
-    final correctAnswerWithoutTags =
-        correctAnswer.replaceAll('@', '').toUpperCase().split(' ').toSet();
+    final correctAnswerWithoutSpacesCommasTags = correctAnswer
+        .replaceAll(',', '')
+        .replaceAll('.', '')
+        .replaceAll('@', '')
+        .toUpperCase()
+        .split(' ')
+        .toSet();
+
+    correctAnswerWithoutSpacesCommasTags.removeAll(ignoreWordSet);
 
     final firstFactorScore = _calculateFirstFactorScore(
       userAnswer,
@@ -50,7 +57,7 @@ class ScoreCalculator {
       answerWithoutSpacesCommas,
     );
     final secondFactorScore = _calculateSecondScoreFactor(
-      correctAnswerWithoutTags,
+      correctAnswerWithoutSpacesCommasTags,
       answerWithoutSpacesCommas,
     );
 
@@ -61,13 +68,15 @@ class ScoreCalculator {
       score = secondFactorScore;
     }
 
-    if (score <= 20) {
+    if (score <= 5) {
+      return 0;
+    } else if (score <= 20) {
       return 1;
-    } else if (score <= 30) {
+    } else if (score <= 50) {
       return 2;
-    } else if (score <= 45) {
+    } else if (score <= 70) {
       return 3;
-    } else if (score <= 68) {
+    } else if (score <= 84) {
       return 4;
     } else {
       return 5;
@@ -97,13 +106,13 @@ class ScoreCalculator {
   }
 
   static int _calculateSecondScoreFactor(
-    Set<String> correctAnswerWithoutTags,
+    Set<String> correctAnswerWithoutSpacesCommasTags,
     Set<String> currentUserAnswer,
   ) {
     var secondFactorSharedSet =
-        correctAnswerWithoutTags.intersection(currentUserAnswer);
+        correctAnswerWithoutSpacesCommasTags.intersection(currentUserAnswer);
 
     return (secondFactorSharedSet.length * 100) ~/
-        correctAnswerWithoutTags.length;
+        correctAnswerWithoutSpacesCommasTags.length;
   }
 }

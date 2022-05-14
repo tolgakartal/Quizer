@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quizer_app/quiz/cubit/quiz_cubit.dart';
 import 'package:quizer_app/quiz/presentation/theme.dart';
+import 'package:quizer_app/quiz/utilities/score_calculator.dart';
 
 /// A list item which contains three vertical elements below each other
 ///
@@ -16,6 +17,7 @@ class QuizerListItem extends StatefulWidget {
     Key? key,
     required this.question,
     required this.answer,
+    required this.index,
     this.correctAnswer,
     this.newElement = false,
   }) : super(key: key);
@@ -24,6 +26,7 @@ class QuizerListItem extends StatefulWidget {
   final String answer;
   final String? correctAnswer;
   final bool newElement;
+  final int index;
 
   @override
   State<QuizerListItem> createState() => _QuizerListItemState();
@@ -34,6 +37,7 @@ class _QuizerListItemState extends State<QuizerListItem> {
   TextEditingController questionController = TextEditingController();
   TextEditingController correctAnswerController = TextEditingController();
   bool showCorrectAnswer = false;
+  int rating = 0;
 
   @override
   void initState() {
@@ -126,6 +130,13 @@ class _QuizerListItemState extends State<QuizerListItem> {
               ),
               maxLines: 3,
               minLines: 1,
+              onChanged: (value) {
+                rating = ScoreCalculator.checkAnswer(
+                  value,
+                  correctAnswerController.text,
+                );
+                setState(() {});
+              },
             ),
 
             /// Vertical spacer
@@ -145,6 +156,47 @@ class _QuizerListItemState extends State<QuizerListItem> {
 
             /// Vertical spacer
             QuizerTheme.defaultVerticalSpacer,
+
+            /// Rating and Delete button panel
+            if (!widget.newElement)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  /// Rating panel
+                  Container(
+                    padding: const EdgeInsets.only(top: 4, bottom: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        if (rating != 0) const Text('Your score'),
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        for (var i = 0; i < rating; i++) const Icon(Icons.star)
+                      ],
+                    ),
+                  ),
+
+                  /// Delete button
+                  TextButton(
+                    onPressed: () {
+                      /// Delete quiz element in the datastore
+                      context.read<QuizCubit>().deleteQuizElement(
+                            index: widget.index,
+                          );
+
+                      /// Fetch and refresh all quiz elements from datastore
+                      context.read<QuizCubit>().fetchQuizElements();
+                    },
+                    child: const Text(
+                      'Delete',
+                      style: TextStyle(
+                        color: Colors.red,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
           ],
         ),
       ),
