@@ -1,10 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-/// This validator indicate the validation error by replacing
+/// This base validator indicate the validation error by replacing
 /// the text field text value with the error message.
-///
-/// This validator displays the validation error message for 1 second
-/// after which the text field is cleared.
 abstract class TextFieldValidator {
   final String validationMessage;
   final TextEditingController controller;
@@ -27,6 +24,11 @@ class TextFieldRequiredValidator extends TextFieldValidator {
           controller: controller,
         );
 
+  /// This validator indicate the validation error by replacing
+  /// the text field text value with the error message.
+  ///
+  /// This validator displays the [validationMessage] for 1 second
+  /// after which the text field is cleared.
   @override
   bool validate() {
     if (controller.text.isEmpty || controller.text == validationMessage) {
