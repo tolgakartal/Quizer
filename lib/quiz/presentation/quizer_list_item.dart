@@ -135,6 +135,10 @@ class _QuizerListItemState extends State<QuizerListItem> {
 
                           /// Fetch all quiz elements from datastore
                           context.read<QuizCubit>().fetchQuizElements();
+
+                          /// Clean answer and question TextEdit fields
+                          questionController.clear();
+                          answerController.clear();
                         },
                       )
                     : IconButton(
