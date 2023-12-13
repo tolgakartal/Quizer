@@ -48,4 +48,4 @@ Contributions to the Quizer App are welcome. Please read our contributing guidel
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](https://opensource.org/license/mit/).
