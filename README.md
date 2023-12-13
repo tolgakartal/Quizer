@@ -1,6 +1,6 @@
 # Quizer App
 
-Quizer App is a quiz application built using Flutter and the BLoC pattern. This document provides an overview of the key components of the application and includes a coding challenge that encourages the application of SOLID principles.
+Quizer App is a quiz application built using Flutter and the BLoC pattern. This document provides an overview of the key components of the application and includes a coding challenge to enhance its functionality and design.
 
 ## Components
 
@@ -24,23 +24,23 @@ The application uses Hive for local data storage. The `QuizRepository` interacts
 
 ### Objective
 
-Your task is to enhance the Quizer App by introducing a new feature or refactoring an existing one. The key requirement is to apply at least one of the SOLID principles in your solution. The SOLID principles are crucial for creating scalable, maintainable, and robust software designs.
+Your task is to enhance the Quizer App by introducing a new feature or refactoring an existing one. The goal is to improve the application's architecture and maintainability.
 
 ### Challenge Description
 
-- **Feature Enhancement**: Introduce a feature that allows users to categorize quiz questions (e.g., by difficulty, topic, etc.). This feature should be implemented in a way that adheres to the SOLID principles. Think about how you can design your classes and interfaces to be single-responsible, open for extension but closed for modification, and so on.
+- **Feature Enhancement**: Add a feature that allows users to categorize quiz questions (e.g., by difficulty, topic, etc.). Your implementation should consider how to integrate this seamlessly with the existing structure, focusing on maintainability and scalability.
 
-- **Refactoring Existing Code**: Identify an area in the existing codebase where a SOLID principle can be better applied. Refactor the code to enhance its design. This could involve separating concerns, reducing dependencies, or making the code more extendable without modifying existing functionality.
+- **Refactoring Existing Code**: Examine the current codebase and identify potential areas for improvement in terms of design and structure. Refactor the code to enhance its maintainability, scalability, and overall quality.
 
 ### Expectations
 
-- **Code Quality**: Your code should be clean, well-organized, and properly documented.
-- **SOLID Application**: Clearly demonstrate the use of SOLID principles in your solution. Provide comments or documentation explaining how your design adheres to these principles.
+- **Code Quality**: Write clean, well-organized, and properly documented code.
+- **Design Consideration**: Your design should clearly demonstrate thoughtful architectural decisions. Pay attention to how your code fits into the existing codebase and how it can evolve in the future.
 - **Testing**: Include unit tests for your new feature or refactored code to ensure functionality and robustness.
 
 ### Submission
 
-Submit your code as a pull request to the project repository. Include a brief description of your changes and how they adhere to SOLID principles.
+Submit your code as a pull request to the project repository. Include a brief description of your changes and the reasons behind your architectural choices.
 
 ## Contributing
 
